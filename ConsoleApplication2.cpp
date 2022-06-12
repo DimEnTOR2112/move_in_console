@@ -25,9 +25,12 @@ int main()
 
 	char wall = '#';
 
+
+
+
 	char map[SIZE][SIZE]
 	{
-		{'@','#','.','#','.','.','.','.','.','.'},
+		{'@','.','.','#','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'},
 		{'.','#','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'},
@@ -38,6 +41,9 @@ int main()
 		{'.','.','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'}
 	};
+
+	int rows = sizeof(map) / sizeof(map[0]);
+	int cols = sizeof(map[0]) / sizeof(map[0][0]);
 
 	while (!rec)
 	{
@@ -55,10 +61,10 @@ int main()
 		cout << "s - движение в низ" << endl;
 		cout << "a - движение в лево" << endl;
 		cout << "d - движение в право" << endl;
-		cout << "esc - выход" << endl;
+		cout << "e - выход" << endl;
 		cout << playerX << endl;
 		cout << playerY << endl;
-		cout << map[playerY][playerX + 1] << endl;
+		cout << map[playerY][playerX - 1] << endl;
 
 
 
@@ -72,6 +78,9 @@ int main()
 		if (check_mov == "d")
 		{
 			if (map[playerY][playerX + 1] == wall) {
+
+			}
+			else if (playerX + 1 >= SIZE) {
 
 			}
 			else {
@@ -88,6 +97,9 @@ int main()
 			if (map[playerY][playerX - 1] == wall) {
 
 			}
+			else if (playerX - 1 <= -1) {
+
+			}
 			else {
 				char temp = map[y][x];
 				map[y][x] = map[y][playerX - 1];
@@ -101,6 +113,10 @@ int main()
 		{
 			if (map[playerY + 1][playerX] == wall) {
 
+			}
+			else if(map[playerY + 1][playerX] >= sizeof(map))
+			{
+				
 			}
 			else {
 				char temp = map[y][x];
@@ -116,6 +132,10 @@ int main()
 		if (check_mov == "w")
 		{
 			if (map[playerY - 1][playerX] == wall) {
+
+			}
+			else if (map[playerY - 1][playerX] >= sizeof(map))
+			{
 
 			}
 			else {
