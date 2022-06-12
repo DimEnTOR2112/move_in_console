@@ -8,6 +8,9 @@ using namespace std;
 
 int main()
 {
+
+
+
 	setlocale(LC_ALL, "ru");
 	srand(time(NULL));
 
@@ -20,11 +23,13 @@ int main()
 	int x = 0;
 	int y = 0;
 
+	char wall = '#';
+
 	char map[SIZE][SIZE]
 	{
-		{'@','.','.','.','.','.','.','.','.','.'},
+		{'@','#','.','#','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'},
-		{'.','.','.','.','.','.','.','.','.','.'},
+		{'.','#','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'},
@@ -33,6 +38,7 @@ int main()
 		{'.','.','.','.','.','.','.','.','.','.'},
 		{'.','.','.','.','.','.','.','.','.','.'}
 	};
+
 	while (!rec)
 	{
 		for (int i = 0; i < SIZE; i++)
@@ -50,53 +56,77 @@ int main()
 		cout << "a - движение в лево" << endl;
 		cout << "d - движение в право" << endl;
 		cout << "esc - выход" << endl;
-		
-		
+		cout << playerX << endl;
+		cout << playerY << endl;
+		cout << map[playerY][playerX + 1] << endl;
+
+
 
 		cin >> check_mov;
 
-		if (check_mov == "esc")
+		if (check_mov == "e")
 		{
-			break;
+			return 0;
 		}
 
 		if (check_mov == "d")
 		{
-			char temp = map[y][x];
-			map[y][x] = map[y][playerX + 1];
-			map[y][playerX + 1] = temp;
-			playerX++;
-			x++;
+			if (map[playerY][playerX + 1] == wall) {
+
+			}
+			else {
+				char temp = map[y][x];
+				map[y][x] = map[y][playerX + 1];
+				map[y][playerX + 1] = temp;
+				playerX++;
+				x++;
+			}
 		}
 
 		if (check_mov == "a")
 		{
-			char temp = map[y][x];
-			map[y][x] = map[y][playerX - 1];
-			map[y][playerX - 1] = temp;
-			playerX--;
-			x--;
+			if (map[playerY][playerX - 1] == wall) {
+
+			}
+			else {
+				char temp = map[y][x];
+				map[y][x] = map[y][playerX - 1];
+				map[y][playerX - 1] = temp;
+				playerX--;
+				x--;
+			}
 		}
 
 		if (check_mov == "s")
 		{
-			char temp = map[y][x];
-			map[y][x] = map[playerY + 1][x];
-			map[playerY + 1][x] = temp;
-			playerY++;
-			y++;
+			if (map[playerY + 1][playerX] == wall) {
+
+			}
+			else {
+				char temp = map[y][x];
+				map[y][x] = map[playerY + 1][x];
+				map[playerY + 1][x] = temp;
+				playerY++;
+				y++;
+			}
+
 		}
 
 
 		if (check_mov == "w")
 		{
-			char temp = map[y][x];
-			map[y][x] = map[playerY - 1][x];
-			map[playerY - 1][x] = temp;
-			playerY--;
-			y--;
-		}
+			if (map[playerY - 1][playerX] == wall) {
 
+			}
+			else {
+				char temp = map[y][x];
+				map[y][x] = map[playerY - 1][x];
+				map[playerY - 1][x] = temp;
+				playerY--;
+				y--;
+			}
+
+		}
 		system("cls");
 	}
 }
