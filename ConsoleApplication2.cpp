@@ -1,7 +1,9 @@
 ﻿#include <iostream>
 #include<ctime>
 #include<string.h>
-
+#include <Windows.h>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 
@@ -9,7 +11,8 @@ using namespace std;
 int main()
 {
 
-
+	using namespace std::this_thread;
+	using namespace std::chrono;
 
 	setlocale(LC_ALL, "ru");
 	srand(time(NULL));
@@ -22,6 +25,8 @@ int main()
 	int playerY = 0;
 	int x = 0;
 	int y = 0;
+
+	int sleepBeforeMove = 100;
 
 	char wall = '#';
 
@@ -55,7 +60,6 @@ int main()
 			}
 			cout << endl;
 		}
-
 		cout << "\nваше действие:" << endl;
 		cout << "w- движение вверх" << endl;
 		cout << "s - движение в низ" << endl;
@@ -67,15 +71,12 @@ int main()
 		cout << map[playerY][playerX - 1] << endl;
 
 
-
-		cin >> check_mov;
-
 		if (check_mov == "e")
 		{
 			return 0;
 		}
 
-		if (check_mov == "d")
+		if (GetKeyState('D') & 0x8000)
 		{
 			if (map[playerY][playerX + 1] == wall) {
 
@@ -84,6 +85,7 @@ int main()
 
 			}
 			else {
+				sleep_for(milliseconds(sleepBeforeMove));
 				char temp = map[y][x];
 				map[y][x] = map[y][playerX + 1];
 				map[y][playerX + 1] = temp;
@@ -92,7 +94,7 @@ int main()
 			}
 		}
 
-		if (check_mov == "a")
+		if (GetKeyState('A') & 0x8000)
 		{
 			if (map[playerY][playerX - 1] == wall) {
 
@@ -101,6 +103,7 @@ int main()
 
 			}
 			else {
+				sleep_for(milliseconds(sleepBeforeMove));
 				char temp = map[y][x];
 				map[y][x] = map[y][playerX - 1];
 				map[y][playerX - 1] = temp;
@@ -109,7 +112,7 @@ int main()
 			}
 		}
 
-		if (check_mov == "s")
+		if (GetKeyState('S') & 0x8000)
 		{
 			if (map[playerY + 1][playerX] == wall) {
 
@@ -119,6 +122,7 @@ int main()
 				
 			}
 			else {
+				sleep_for(milliseconds(sleepBeforeMove));
 				char temp = map[y][x];
 				map[y][x] = map[playerY + 1][x];
 				map[playerY + 1][x] = temp;
@@ -129,7 +133,7 @@ int main()
 		}
 
 
-		if (check_mov == "w")
+		if (GetKeyState('W') & 0x8000)
 		{
 			if (map[playerY - 1][playerX] == wall) {
 
@@ -139,13 +143,13 @@ int main()
 
 			}
 			else {
+				sleep_for(milliseconds(sleepBeforeMove));
 				char temp = map[y][x];
 				map[y][x] = map[playerY - 1][x];
 				map[playerY - 1][x] = temp;
 				playerY--;
 				y--;
 			}
-
 		}
 		system("cls");
 	}
