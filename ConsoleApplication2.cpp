@@ -4,14 +4,24 @@
 #include <Windows.h>
 #include <chrono>
 #include <thread>
-using namespace std;
+#include <curses.h>
 
 
 
 int main()
 {
+	initscr();
+	start_color();
+	init_pair(1,COLOR_RED,COLOR_CYAN);
+	refresh();
+	attron(COLOR_PAIR(1));
+	printw("Satana");
 
-	using namespace std::this_thread;
+	getch();	
+	endwin();			
+	return 0;
+}
+/*	using namespace std::this_thread;
 	using namespace std::chrono;
 
 	setlocale(LC_ALL, "ru");
@@ -26,7 +36,7 @@ int main()
 	int x = 0;
 	int y = 0;
 
-	int sleepBeforeMove = 100;
+	int sleepBeforeMove = 200;
 
 	char wall = '#';
 
@@ -153,4 +163,4 @@ int main()
 		}
 		system("cls");
 	}
-}
+} */
